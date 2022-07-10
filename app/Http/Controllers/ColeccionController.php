@@ -96,10 +96,28 @@ class ColeccionController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $coleccion = Coleccion::find($id);
-        $coleccion -> nombre = $request -> get ('nombre');
-
-        $coleccion -> update();
+        $coleccion = Coleccion::where('id_coleccion', $id)->update(
+            [
+                "nombre" => $request->get('nombre')
+            ]
+        );
+        if (!$coleccion) {
+            $error_message = [
+                "ok" => false,
+                "data" => null,
+                "error" => [
+                    "message:" => "Resource not found with id $id"
+                ]
+            ];
+            return response($error_message, 404);
+        } else {
+            $success_message = [
+                "ok" => true,
+                "data" => Coleccion::where('id_coleccion', $id)->get()->first(),
+                "error" => null
+            ];
+            return response($success_message, 200);
+        }
     }
 
     /**
