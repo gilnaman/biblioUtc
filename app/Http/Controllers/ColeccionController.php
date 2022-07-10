@@ -52,8 +52,24 @@ class ColeccionController extends Controller
     public function show($id)
     {
         //
-        $coleccion = Coleccion::find($id);
-        return $coleccion;
+        $coleccion  = Coleccion::where('id_coleccion', $id)->get()->first();
+        if (empty($coleccion)) {
+            $error_message = [
+                "ok" => false,
+                "data" => null,
+                "error" => [
+                    "message:" => "Resource not found with id $id"
+                ]
+            ];
+            return response($error_message, 404);
+        } else {
+            $success_message = [
+                "ok" => true,
+                "data" => $coleccion,
+                "error" => null
+            ];
+            return response($success_message, 200);
+        }
 
     }
 
