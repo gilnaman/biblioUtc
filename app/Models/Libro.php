@@ -16,7 +16,7 @@ class Libro extends Model
     
     public $with=['coleccion'];//especificamos las relaciones de las ids
 
-    public $Incrementing=false;// la clave primaria es numerica
+    public $incrementing=false;// la clave primaria es numerica
     public $timestamps=true;  //se va a utilizar etiquetas de tiempo
     
     //lista de campos que van a consumir valor
