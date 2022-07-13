@@ -1,7 +1,14 @@
-var urlBase = "http://127.0.0.1:8000"
-var url = urlBase + "/api"
+//Obtener el host dinamicamente
+var host = window.location.hostname;
 
-//window.location.replace(url);
+//Validar si se esta usando el servidor de laravel para agregar el puerto
+if (host == '127.0.0.1') {
+    host = host + ":8000";
+}
+
+//Crear la ruta final con el prefijo api
+var url = "http://" + host + "/api";
+
 
 new Vue({
     el: '#auth',
@@ -9,6 +16,8 @@ new Vue({
     data: {
         //Verifica que si se recupero el usuario
         matriculaVerificada: false,
+        //lista de actividades
+        actividades: [],
         //Nombre que se va mostrar
         nombreUser: '',
         //Json que se va mandar
@@ -25,8 +34,28 @@ new Vue({
         banner: -1, //Si es -1 no existe, si es 0 es error y si es 1 es correcto
     },
 
+    created() {
+        this.cargarAcciones();
+    },
+
     methods: {
-        validarMatricula: function() {
+        mostrarAlertas: function (header, mensaje, icono) {
+            Swal.fire(
+                header,
+                mensaje,
+                icono
+            );
+        },
+
+        cargarAcciones: function () {
+            this.$http.get(url + '/lista-acciones').then(function (json) {
+                this.actividades = json.data;
+            }).catch(function (json) {
+                console.log(json);
+            });
+        },
+
+        validarMatricula: function () {
             //Esconder la alerta si esta visible
             this.banner = -1;
             //Validar que el campo no este vacio
@@ -40,11 +69,15 @@ new Vue({
                 return;
             }
 
-            this.$http.post(url + '/confirmar-password', this.data).then(function(json) {
+            this.$http.post(url + '/confirmar-matricula', this.data).then(function (json) {
                 //Validar si existe un usuario
                 if (json.data.error == true) {
                     //Si la validacion es correcta es que no existe la matricula
-                    alert('El usuario no es valido');
+                    this.mostrarAlertas(
+                        'No existe',
+                        'El usuario proporcionado no existe',
+                        'error'
+                    )
                     //Cancelar el proceso
                     return;
                 }
@@ -55,17 +88,21 @@ new Vue({
 
                 //El usuario si existe mostrar la modal
                 $("#modalAccion").modal('show');
-                
-            }).catch(function(json) {
+
+            }).catch(function (json) {
                 //Si la peticion falla mostrar los errores
                 console.log(json);
             });
         },
 
-        mandarRespuesta: function() {
+        mandarRespuesta: function () {
             //Validar que el usuario exista
             if (this.matriculaVerificada == false) {
-                alert('Acción no valida refresque la pagina');
+                this.mostrarAlertas(
+                    'Operación invalida',
+                    'si el problema persiste refresque la pagina',
+                    'error'
+                )
                 return;
             }
 
@@ -81,26 +118,26 @@ new Vue({
 
             //alert('correcto');
         },
-        
+
         validaciones: function () {
             this.erroresValidacion = {
                 actividad: null,
                 matricula: null,
             };
             //Validar que la actividad no sea la que esta por defecto
-            if(this.data.actividad == -1) {
+            if (this.data.actividad == -1) {
                 //Si se encuentra agregar el error al objecto
                 this.erroresValidacion = {
                     'actividad': 'Seleccione una opción valida',
                 };
-                
+
                 //Regresar un true
                 return true;
             }
             return false;
         },
 
-        resetUI: function() {
+        resetUI: function () {
             //Resetear las variables iniciales
             this.erroresValidacion = {
                 actividad: null,
@@ -112,12 +149,12 @@ new Vue({
             this.banner = -1;
         },
 
-        crearRegistro: function() {
+        crearRegistro: function () {
             //variable para crear una llave
             $respuesta = false;
 
             //Mandar la peticion al servidor
-            this.$http.post(url + '/registrar-acceso', this.data).then(function(json) {
+            this.$http.post(url + '/registrar-acceso', this.data).then(function (json) {
                 //Validar que la respuesta sea correcta
                 if (json.data.respuesta == true) {
                     //redireccionar a la vista seleccionada
@@ -130,8 +167,13 @@ new Vue({
                 }
 
                 $("#modalAccion").modal('hide');
-                
-            }).catch(function(json) {
+
+            }).catch(function (json) {
+                this.mostrarAlertas(
+                    'Ocurrio un error',
+                    'Consulte la consola para conocer los detalles',
+                    'error'
+                )
                 console.log(json);
             })
         },
