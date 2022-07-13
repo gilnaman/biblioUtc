@@ -17,4 +17,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::view('paises','gestionPaises');
+//Route::view('paises','gestionPaises');
+
+Route::view('pais','Paises');
+Route::put('update/pais','App\Http\Controllers\PaisesController@update');
+
+Route::get('getPaises', 'App\Http\Controllers\PaisesController@index');

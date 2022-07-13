@@ -11,7 +11,7 @@ class Paises extends Model
     protected $table = "paises";
     protected $primaryKey="id_pais";
     public $incrementing = true;
-    public $timestamp = false;
+    public $timestamps = false;
 
     protected $fillable = [
         'id_pais',
