@@ -14,9 +14,9 @@ class libro extends Model
     protected $primaryKey='isbn';
 
     //especificamos las relaciones de las ids
-    public $with=['coleccion'];
+    public $with=['paises', 'colecciones', 'libros_autores'];
 
-    public $Incrementing=false;
+    public $Incrementing=true;
     public $timestamps=true;
     
     //base de datos
