@@ -49,31 +49,17 @@
                             <table class="table table-responsive">
                                 <thead>
                                     <tr>
-                                        <th scope="col">ID Card Number</th>
-                                        <th scope="col">Photo</th>
-                                        <th scope="col">First Name</th>
-                                        <th scope="col">Last Name</th>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">Phone</th>
-                                        <th scope="col">Actions</th>
+                                        <th scope="col">nombrer</th>
+                                        <th scope="col">apellido</th>
+                                        <th scope="col">matricula</th>
+                                        <th scope="col">grupo</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($studentList as $student)
                                     <tr>
                                         <th scope="row">{{$student->id_card_number}}</th>
-                                        <td>
-                                            @if (isset($student->student->photo))
-                                                <img src="{{asset('/storage'.$student->student->photo)}}" class="rounded" alt="Profile picture" height="30" width="30">
-                                            @else
-                                                <i class="bi bi-person-square"></i>
-                                            @endif
-                                        </td>
-                                        <td>{{$student->student->first_name}}</td>
-                                        <td>{{$student->student->last_name}}</td>
-                                        <td>{{$student->student->email}}</td>
-                                        <td>{{$student->student->phone}}</td>
-                                        <td>
+                                       
                                             <div class="btn-group" role="group">
                                                 <a href="{{route('student.attendance.show', ['id' => $student->student->id])}}" role="button" class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i> Attendance</a>
                                                 <a href="{{url('students/view/profile/'.$student->student->id)}}" role="button" class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i> Profile</a>
