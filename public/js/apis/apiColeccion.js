@@ -134,6 +134,6 @@ new Vue({
 
 
 	}
-	//fin computed
+	
 
 });
