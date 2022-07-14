@@ -18,7 +18,7 @@ class Coleccion extends Model
     protected $fillable = [
         'id_coleccion',
         'nombre',
-	'activo'
+        'activo'
     ];
 
 }
