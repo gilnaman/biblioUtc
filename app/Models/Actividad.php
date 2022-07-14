@@ -11,7 +11,7 @@ class Actividad extends Model
     protected $primaryKey='id_actividad';
 
     public $incrementing=true;
-    public $timestamps=false;
+    public $timestamps=true;
 
     public $fillable=[
         'id_actividad',
