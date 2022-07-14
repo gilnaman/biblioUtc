@@ -83,6 +83,7 @@ class PaisesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $pais = Paises::find($id);
+        $pais->delete();
     }
 }

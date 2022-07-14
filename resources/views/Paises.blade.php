@@ -34,7 +34,9 @@
 							<button type="button" class="btn btn-info" @click="editarPais(pais)">
 								<i class="fas fa-edit"></i>Editar Pais
 							</button>
-									 
+							<button type="button" class="btn btn-info" @click="eliminarPais(pais.id_pais)">
+								<i class="fas fa-edit"></i>Eliminar Pais
+							</button>	 
 						</td>
 						
 					</tr>

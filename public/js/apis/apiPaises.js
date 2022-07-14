@@ -96,6 +96,14 @@ new Vue({
         
 
         },
+        eliminarPais: function(id){
+
+            var url = 'delete/pais';
+            let IdPais = id;
+            this.$http.delete(url + '/' + IdPais).then(function(){
+                this.obtenerPaises();
+            });
+        },
 
 
 

@@ -21,5 +21,5 @@ Route::get('/', function () {
 
 Route::view('pais','Paises');
 Route::put('update/pais','App\Http\Controllers\PaisesController@update');
-
+Route::delete('delete/pais/{id}','App\Http\Controllers\PaisesController@destroy');
 Route::get('getPaises', 'App\Http\Controllers\PaisesController@index');
