@@ -1,5 +1,14 @@
+var ruta = document.querySelector("[name=route]").value;
+
 new Vue({
     el: "#pais",
+    
+    http: {
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('#token').getAttribute('value')
+        }
+    },
+
     data: {
         paises: [],
         nombre_pais: '',
@@ -32,11 +41,12 @@ new Vue({
             this.id_pais=0
             this.nombre_pais=""
             $("#modalPais").modal('hide');
+
         },
 
         mostrarModal: function() {
             this.agregando = true;
-            this.obtenerPaises();
+            this.id_pais=0;
             this.nombre_pais = '';
 
             $('#modalPais').modal('show');
@@ -48,7 +58,7 @@ new Vue({
             this.arrayError=[];
 
             if (!this.nombre_pais) this.arrayError.push('El nombre es requerido');
-            if (this.nombre_pais.length > 30) this.arrayError.push('El nombre tiene un limite de 60 letras');
+            if (this.nombre_pais.length > 60) this.arrayError.push('El nombre tiene un limite de 60 letras');
 
             
             //compruebo si el mensaje tiene algun error para convertir a la variabe  en 1
@@ -56,6 +66,15 @@ new Vue({
                 //retorno el rror 
             return this.error;
             
+        },
+
+        guardarPais(){
+         //validacion de inputs
+           if(this.validarInputs()){
+
+                return;                
+           }
+
         },
 
       
@@ -75,7 +94,11 @@ new Vue({
         },
 
         actualizarPais: function(){
-               
+               //validacion de inputs
+               if(this.validarInputs()){
+
+                    return;                
+               }
                var url='update/pais';
                 //creo un array que contendra los datos
         	    let PaisUpdate = {

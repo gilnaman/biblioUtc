@@ -9,7 +9,7 @@
 					<form>
 						<div  class="input-group col-3">
 
-							<button class="btn btn-outline-primary" type="button" >Agregar Pais</button>
+							<button class="btn btn-outline-primary" type="button" @click="mostrarModal()">Agregar Pais</button>
 						
 							<input type="text" class="form-control" placeholder=" Buscar Pais" v-model="buscar" aria-label="search">
 						</div>
@@ -22,11 +22,11 @@
 			<table class="table table-bordered table-hover table-sm">
 				<thead>
 					<th>#</th>	<!-- el hidden sirve para ocultar la columna o fila -->	
-      <th>Nombre del pais</th>
+     				<th>Nombre del pais</th>
 					<th>Acciones</th>
 				</thead>
 				<tbody>
-					<tr v-for="pais in paises">
+					<tr v-for="pais in filtroPaises">
 						<td>@{{pais.id_pais}}</td>
 						<td>@{{pais.nombre_pais}}</td>
 						<td>
@@ -60,6 +60,16 @@
 				</div>
 				<div class="modal-body">
 
+					 <!-- mensaje de validacion -->
+                    <div v-show="error" class="form-group row div-error">
+                        <div class="text-center text-error">
+                            <div v-for="error in arrayError" :key="error" v-text="error">
+
+                            </div>
+                        </div>
+                    </div>
+
+
 					
 					<h6>NOMBRE DEL PAIS</h6>
 					<input type="text" class="form-control" placeholder="Nombre del pais" v-model="nombre_pais"><br>
@@ -84,7 +94,10 @@
 
 	@push('js')
 
+	<script src="js/vue-resource.js"></script>
 	<script src="js/apis/apiPaises.js"></script>
-
 	@endpush
+
+	<!-- 	//conexion con el token http -->
+	<input type="hidden" name="route" value="{{url('/')}}">
 
