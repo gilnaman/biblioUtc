@@ -10,6 +10,9 @@ new Vue({
   el: '#app',
   data() {
     return {
+      formulario: {
+        actividad: ""
+      },
       actividades: []
     }
   },
@@ -29,7 +32,24 @@ new Vue({
       } catch (error) {
         throw error
       }
-    }
+    },
+    async agregarActividad() {
+      try {
+        const response = await fetch(`${origin}/api/actividad`, {
+          method: 'POST',
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": token
+          },
+          body: JSON.stringify(this.formulario)
+        })
+        console.log(response)
+        this.formulario.actividad = ""
+        await this.obtenerActividades()
+      } catch (error) {
+        throw error
+      }
+    },
   },
   computed: {
     formatoFecha() {
