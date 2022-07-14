@@ -10,6 +10,18 @@
   </head>
   <body>
     <div id="app">
+      <!-- Modal -->
+      <x-modal id="agregar">
+        <form action="#">
+          <div class="mb-3">
+            <label for="actividad" class="form-label">Actividad</label>
+            <input v-model="formulario.actividad" type="text" class="form-control" id="actividad" />
+            <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+          </div>
+        </form>
+      </x-modal>
+      <!-- fin modal -->
+
       <nav class="navbar bg-light">
         <div class="container">
           <a class="navbar-brand" href="#">
@@ -23,7 +35,7 @@
             <h2>Actividades</h2>
           </div>
           <div class="col d-flex justify-content-end">
-            <button class="btn btn-primary">Agregar actividad</button>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agregar">Agregar actividad</button>
           </div>
         </div>
         <div class="row p-4">
