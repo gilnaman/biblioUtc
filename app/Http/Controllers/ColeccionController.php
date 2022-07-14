@@ -15,7 +15,8 @@ class ColeccionController extends Controller
     public function index()
     {
         //
-        return $coleccion = Coleccion::all();
+        $coleccion = Coleccion::where('activo','1')->get();
+        return response()->json($coleccion, 200);
     }
 
     /**
@@ -129,7 +130,7 @@ class ColeccionController extends Controller
     public function destroy($id)
     {
         //
-        $coleccion = Coleccion::where('id_coleccion', $id)->delete();
+        $coleccion = Coleccion::where('id_coleccion', $id)->update(['activo' => "0"]);
         if (!$coleccion) {
             $error_message = [
                 "ok" => false,
