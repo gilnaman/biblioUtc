@@ -55,7 +55,7 @@
                             <figure class="float-start">
                                 <img src="{{ asset('logo.png') }}" class="img-logo" alt="Logo UTC">
                             </figure>
-                            <h4 class="text-center my-2">Ingrese sus credenciales</h4>
+                            <h4 class="text-center my-2">Registro Acceso</h4>
                         </div>
                     </div>
 
