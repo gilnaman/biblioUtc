@@ -11,16 +11,79 @@
   <body>
     <div id="app">
       <!-- Modal -->
-      <x-modal id="agregar">
+      <!-- <x-modal id="agregar">
         <form action="#">
           <div class="mb-3">
             <label for="actividad" class="form-label">Actividad</label>
             <input v-model="formulario.actividad" type="text" class="form-control" id="actividad" />
-            <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
           </div>
         </form>
-      </x-modal>
+      </x-modal> -->
       <!-- fin modal -->
+
+      <div class="modal fade" id="agregar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Agregar actividad</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form action="#">
+                <div class="mb-3">
+                  <label for="actividad" class="form-label">Actividad</label>
+                  <input v-model="formulario.actividad" type="text" class="form-control" id="actividad" />
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button @click="agregarActividad" type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="editar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Editar actividad</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form action="#">
+                <div class="mb-3">
+                  <label for="actividad" class="form-label">Actividad</label>
+                  <input v-model="formulario.actividad" type="text" class="form-control" id="actividad" />
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button click="editarActividad" type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="eliminar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Eliminar actividad</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <h6>¿Estas seguro que deseas realizar esta acción?</h6>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button click="eliminarActividad" type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <nav class="navbar bg-light">
         <div class="container">
@@ -56,8 +119,8 @@
                 <td>@{{ formatoFecha(actividad.created_at) }}</td>
                 <td>@{{ formatoFecha(actividad.updated_at) }}</td>
                 <td>
-                  <button class="btn btn-warning">Actualizar</button>
-                  <button class="btn btn-danger">Eliminar</button>
+                  <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editar">Actualizar</button>
+                  <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminar">Eliminar</button>
                 </td>
               </tr>
             </tbody>
