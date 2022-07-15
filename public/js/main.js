@@ -53,7 +53,24 @@ new Vue({
     },
     seleccionarActividad(id) {
       this.actividadSeleccionada = id
-    }
+    },
+    editarActividad() {
+      fetch(origin + '/api/actividad/' + this.seleccionarActividad, {
+        method: 'PUT',
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRF-TOKEN": token
+        },
+        body: JSON.stringify(this.formulario)
+      }).then(function (respuesta) {
+        return respuesta.json()
+      }).then(function (data) {
+        this.seleccionarActividad = null
+        console.log(data)
+      }).catch(function (error) {
+        throw error
+      })
+    },
   },
   computed: {
     formatoFecha() {
