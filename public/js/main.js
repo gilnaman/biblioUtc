@@ -71,6 +71,22 @@ new Vue({
         throw error
       })
     },
+    eliminarActividad() {
+      fetch(origin + '/api/actividad/' + this.seleccionarActividad, {
+        method: 'DELETE',
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRF-TOKEN": token
+        }
+      }).then(function (respuesta) {
+        return respuesta.json()
+      }).then(function (data) {
+        this.seleccionarActividad = null
+        console.log(data)
+      }).catch(function (error) {
+        throw error
+      })
+    }
   },
   computed: {
     formatoFecha() {
