@@ -10,17 +10,6 @@
   </head>
   <body>
     <div id="app">
-      <!-- Modal -->
-      <!-- <x-modal id="agregar">
-        <form action="#">
-          <div class="mb-3">
-            <label for="actividad" class="form-label">Actividad</label>
-            <input v-model="formulario.actividad" type="text" class="form-control" id="actividad" />
-          </div>
-        </form>
-      </x-modal> -->
-      <!-- fin modal -->
-
       <div class="modal fade" id="agregar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
@@ -119,8 +108,8 @@
                 <td>@{{ formatoFecha(actividad.created_at) }}</td>
                 <td>@{{ formatoFecha(actividad.updated_at) }}</td>
                 <td>
-                  <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editar">Actualizar</button>
-                  <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminar">Eliminar</button>
+                  <button @click="seleccionarActividad(actividad.id_actividad)" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editar">Actualizar</button>
+                  <button @click="seleccionarActividad(actividad.id_actividad)" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminar">Eliminar</button>
                 </td>
               </tr>
             </tbody>

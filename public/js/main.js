@@ -13,7 +13,8 @@ new Vue({
       formulario: {
         actividad: ""
       },
-      actividades: []
+      actividades: [],
+      actividadSeleccionada: null
     }
   },
   mounted() {
@@ -50,6 +51,9 @@ new Vue({
         throw error
       }
     },
+    seleccionarActividad(id) {
+      this.actividadSeleccionada = id
+    }
   },
   computed: {
     formatoFecha() {
