@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\Models\Actividad;
 use Illuminate\Http\Request;
 
@@ -19,16 +20,6 @@ class ActividadController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -36,15 +27,21 @@ class ActividadController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'actividad' => 'required'
-        ]);
 
-        Actividad::create([
-            'actividad'=> $data['actividad']
-        ]);
+        try {
+            $data = $request->validate([
+                'actividad' => 'required'
+            ]);
 
-        return 'guardado';
+            Actividad::create([
+                'actividad'=> $data['actividad']
+            ]);
+
+            return response()->json(['message'=> "Actividad guardada"]);
+        }catch(Exception $e){
+            return response()->json(['message'=> $e->getMessage()]);
+        }
+
     }
 
     /**
@@ -55,18 +52,11 @@ class ActividadController extends Controller
      */
     public function show(Actividad $actividad)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Actividad  $actividad
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Actividad $actividad)
-    {
-        //
+        try{
+            return response()->json($actividad,200);
+        }catch(Exception $e){
+            return response()->json(['message'=> $e->getMessage()]);
+        }
     }
 
     /**
@@ -78,7 +68,20 @@ class ActividadController extends Controller
      */
     public function update(Request $request, Actividad $actividad)
     {
-        //
+
+        try{
+            $data = $request->validate([
+                'actividad' => 'required'
+            ]);
+
+                $actividad->actividad = $data['actividad'];
+                $actividad->save();
+
+            return response()->json(['message'=> "Actividad actualizado correctamente"]);
+
+        }catch(Exception $e){
+            return response()->json(['message'=> $e->getMessage()]);
+        }
     }
 
     /**
@@ -89,6 +92,11 @@ class ActividadController extends Controller
      */
     public function destroy(Actividad $actividad)
     {
-        //
+        try{
+            $actividad->delete();
+            return response()->json(['message'=> "Actividad Eliminado correctamente"]);
+        } catch(Exception $e){
+            return response()->json(['message'=> $e->getMessage()]);
+        }
     }
 }
