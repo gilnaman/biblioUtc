@@ -36,7 +36,12 @@ class PaisesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $paises=new Paises();
+
+        $paises->id_pais=$request->get('id_pais');
+        $paises->nombre_pais=$request->get('nombre_pais');
+    
+        $paises->save();
     }
 
     /**
