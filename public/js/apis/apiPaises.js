@@ -84,7 +84,7 @@ new Vue({
                 console.log(j);
             })
 
-            $('#modalProducto').modal('hide');
+            $('#modalPais').modal('hide');
 
             console.log('Exitoooooooo');
 
