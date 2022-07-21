@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Libro extends Model
+class libro extends Model
 {
     use HasFactory;
     protected $table='libros';
@@ -13,25 +13,29 @@ class Libro extends Model
     //llave primaria
     protected $primaryKey='isbn';
 
-    
-    public $with=['coleccion'];//especificamos las relaciones de las ids
+    //especificamos las relaciones de las ids
+    public $with=['paises', 'colecciones', 'libros_autores'];
 
-    public $incrementing=false;// la clave primaria es numerica
-    public $timestamps=true;  //se va a utilizar etiquetas de tiempo
+    public $Incrementing=true;
+    public $timestamps=true;
     
-    //lista de campos que van a consumir valor
+    //base de datos
     protected $fillable=[
         'titulo',
         'fecha_publicacion',
         'paginas',
+        'created_at',
+        'updated_at',
         'cutter',
         'dewey',
         'caratula'
       
     ];
-
-    // public function colecion () // encarga de hacer la union o relacion
-    // {
-    //     return $this->belongsTo(::class, 'id_colecion', 'id_colecion');
-    // }
+    // llaves foraneas
+    public function coleccion () {
+        return $this->belongsTo(Coleccion::class, 'id_coleccion', 'id_coleccion');
+     }
+     public function pais () {
+        return $this->belongTo(pais::class, 'id_pais', 'id_pais');
+     }
 }
