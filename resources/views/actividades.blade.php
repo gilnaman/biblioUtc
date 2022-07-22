@@ -27,7 +27,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button @click="agregarActividad" type="button" class="btn btn-primary">Save changes</button>
+              <button @click="agregarActividad" type="button" data-bs-dismiss="modal" class="btn btn-primary">Save changes</button>
             </div>
           </div>
         </div>
@@ -50,7 +50,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button @click="editarActividad" type="button" class="btn btn-primary">Save changes</button>
+              <button @click="editarActividad" type="button" data-bs-dismiss="modal" class="btn btn-primary">Save changes</button>
             </div>
           </div>
         </div>
@@ -68,7 +68,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button @click="eliminarActividad" type="button" class="btn btn-primary">Save changes</button>
+              <button @click="eliminarActividad" type="button" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
             </div>
           </div>
         </div>
