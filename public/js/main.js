@@ -54,38 +54,34 @@ new Vue({
     seleccionarActividad(id) {
       this.actividadSeleccionada = id
     },
-    editarActividad() {
-      fetch(origin + '/api/actividad/' + this.seleccionarActividad, {
-        method: 'PUT',
-        headers: {
-          "Content-Type": "application/json",
-          "X-CSRF-TOKEN": token
-        },
-        body: JSON.stringify(this.formulario)
-      }).then(function (respuesta) {
-        return respuesta.json()
-      }).then(function (data) {
-        this.seleccionarActividad = null
-        console.log(data)
-      }).catch(function (error) {
+    async editarActividad() {
+      try {
+        await fetch(origin + '/api/actividad/' + this.actividadSeleccionada, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': token
+          },
+          body: JSON.stringify(this.formulario)
+        })
+        await this.obtenerActividades()
+      } catch (error) {
         throw error
-      })
+      }
     },
-    eliminarActividad() {
-      fetch(origin + '/api/actividad/' + this.seleccionarActividad, {
-        method: 'DELETE',
-        headers: {
-          "Content-Type": "application/json",
-          "X-CSRF-TOKEN": token
-        }
-      }).then(function (respuesta) {
-        return respuesta.json()
-      }).then(function (data) {
-        this.seleccionarActividad = null
-        console.log(data)
-      }).catch(function (error) {
+    async eliminarActividad() {
+      try {
+        await fetch(origin + '/api/actividad/' + this.actividadSeleccionada, {
+          method: 'DELETE',
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": token
+          }
+        })
+        await this.obtenerActividades()
+      } catch (error) {
         throw error
-      })
+      }
     }
   },
   computed: {
