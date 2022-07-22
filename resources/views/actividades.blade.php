@@ -108,8 +108,8 @@
                 <td>@{{ formatoFecha(actividad.created_at) }}</td>
                 <td>@{{ formatoFecha(actividad.updated_at) }}</td>
                 <td>
-                  <button @click="seleccionarActividad(actividad.id_actividad)" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editar">Actualizar</button>
-                  <button @click="seleccionarActividad(actividad.id_actividad)" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminar">Eliminar</button>
+                  <button @click="seleccionarActividad(actividad)" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editar">Actualizar</button>
+                  <button @click="seleccionarActividad(actividad)" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminar">Eliminar</button>
                 </td>
               </tr>
             </tbody>

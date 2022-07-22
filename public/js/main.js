@@ -51,8 +51,9 @@ new Vue({
         throw error
       }
     },
-    seleccionarActividad(id) {
-      this.actividadSeleccionada = id
+    seleccionarActividad(actividad) {
+      this.actividadSeleccionada = actividad.id_actividad
+      this.formulario.actividad = actividad.actividad
     },
     async editarActividad() {
       try {
