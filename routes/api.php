@@ -1,7 +1,9 @@
 <?php
 
+use app\Http\Controllers\API\AlumnosControllerApi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use League\Flysystem\Plugin\GetWithMetadata;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +19,12 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+route::GET('/Alumnos', 'App\Http\Controllers\AlumnosController@index');
+
+route::POST('/Alumnos', 'App\Http\Controllers\AlumnosController@store');
+
+route::PUT('/Alumnos', 'App\Http\Controllers\AlumnosController@update');
+
+route::DELETE('/Alumnos', 'App\Http\Controllers\AlumnosController@destroy');
+
