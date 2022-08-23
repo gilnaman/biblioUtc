@@ -124,3 +124,12 @@
 
 
 <input type="hidden" name="route" value="{{url('/')}}">
+
+
+
+
+
+
+
+
+
